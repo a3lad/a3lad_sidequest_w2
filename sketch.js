@@ -32,7 +32,11 @@ let blob3 = {
 
   // Friction
   frictionAir: 0.995, // Light friction in air
-  frictionGround: 0.95, // Stronger friction on ground
+  frictionGround: 0.95,
+
+  bounce: 0.75, // how strong the bounce is (0–1)
+  minBounce: 0.5, // prevents tiny micro-bounces
+  hasBounced: false, // Stronger friction on ground
 };
 
 // List of solid platforms the blob can stand on
@@ -116,10 +120,18 @@ function draw() {
   for (const s of platforms) {
     if (overlap(box, s)) {
       if (blob3.vy > 0) {
-        // Falling → land on top of a platform
         box.y = s.y - box.h;
-        blob3.vy = 0;
-        blob3.onGround = true;
+
+        // If we haven't bounced yet and we hit with enough speed → bounce!
+        if (!blob3.hasBounced && blob3.vy > blob3.minBounce) {
+          blob3.vy *= -blob3.bounce; // reverse + reduce speed
+          blob3.hasBounced = true;
+          blob3.onGround = false;
+        } else {
+          // Otherwise just land normally
+          blob3.vy = 0;
+          blob3.onGround = true;
+        }
       } else if (blob3.vy < 0) {
         // Rising → hit the underside of a platform
         box.y = s.y + s.h;
@@ -183,13 +195,6 @@ function keyPressed() {
   ) {
     blob3.vy = blob3.jumpV;
     blob3.onGround = false;
+    blob3.hasBounced = false;
   }
 }
-
-/* In-class tweaks for experimentation:
-   • Add a new platform:
-     platforms.push({ x: 220, y: floorY3 - 150, w: 80, h: 12 });
-
-   • “Ice” feel → frictionGround = 0.95
-   • “Sand” feel → frictionGround = 0.80
-*/

@@ -1,12 +1,12 @@
 ## Project Title
 
-GBDA302 Sidequest 2
+Side Quest Week 2
 
 ---
 
-## Authors
+## Group Number (only for group work)
 
-Ayushi Lad
+n/a
 
 ---
 
@@ -16,22 +16,18 @@ Added an increased speed for the blob and changed gravity so it floats more. Col
 
 ---
 
-## Learning Goals
+## Interaction Instructions
 
-Learning Goals:
-
-- Express emotions through environment and blob behaviour
+Use WASD + space to move and jump
 
 ---
 
 ## Assets
 
-N/A
+## n/a
 
----
+## References
 
-## GenAI
-
-This code was taken from the Week 2 Example and edited by Ayushi Lad. GenAI was only used to make the blob mechanics, everything else was done by Ayushi Lad.
+n/a
 
 ---
